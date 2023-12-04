@@ -21,7 +21,7 @@ function NavBar() {
             <li className='lists'>01 Instruction</li>
           </Link>
           <Link to='/EnterStudentID' style={{ textDecoration: 'none' }}>
-            <li className='lists'>02 Set Student ID</li>
+            <li className='lists'>02 Login</li>
           </Link>
           <Link to='/previouscourses' style={{ textDecoration: 'none' }}>
             <li className='lists'>03 Enter the Previous Courses</li>

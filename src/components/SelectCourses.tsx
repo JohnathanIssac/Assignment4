@@ -1,7 +1,7 @@
 // SelectCourses.tsx
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { studentID } from "./EnterStudentID";
+import { studentId } from "./EnterStudentID";
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -64,7 +64,7 @@ function SelectCourses() {
 
   return (
     <div className="BackBoard">
-      {studentID.trim() === "" ? (
+      {studentId.trim() === "" ? (
         <>
           <h2 className="cen">Student ID: -1</h2>
           <h2 className="cen">Enter Student ID First</h2>

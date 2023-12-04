@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { studentID } from "./EnterStudentID"; // Import the studentID
+
+import { studentId } from "./EnterStudentID";
 import "../App.css";
 
 interface Course {
@@ -11,7 +12,7 @@ const PreviousCourses = () => {
   const [coursePre, setCoursePre] = useState<Course[]>([]);
   const [checkedCourses, setCheckedCourses] = useState<string[]>([]);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
-  const isStudentIDEmpty = studentID.trim() === "";
+  const isStudentIDEmpty = studentId.trim() === "";
 
   useEffect(() => {
     Axios.get(`http://127.0.0.1:3001/getAllCourseIDs`)
@@ -38,11 +39,12 @@ const PreviousCourses = () => {
     console.log("Selected Courses: ", checkedCourses);
     if (checkedCourses.length > 0) {
       Axios.post(`http://127.0.0.1:3001/updateTranscript`, {
-        studentID: studentID,
+        studentID: studentId,
         selectedCourses: checkedCourses,
       })
         .then(response => {
           console.log("Courses updated successfully:", response.data);
+          alert("Submission Successful");
           setSubmissionSuccess(true); // Set success state to true
         })
         .catch(error => {
@@ -60,7 +62,7 @@ const PreviousCourses = () => {
         </>
       ) : (
         <>
-          <h2 className="cen">Student ID: {studentID}</h2>
+          <h2 className="cen">Student ID: {studentId}</h2>
           <div className="course-list">
             {coursePre.map((course, index) => (
               <div key={index} className="course-item">
@@ -87,7 +89,6 @@ const PreviousCourses = () => {
           </div>
           {submissionSuccess && (
             <div className="success-message">
-              Submission was successful! {/* You can customize this message */}
             </div>
           )}
         </>

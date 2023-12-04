@@ -1,0 +1,21 @@
+{
+  "name": "work",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hashutil.js",
+  "type": "CommonJS",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "crypto-js": "^4.2.0",
+    "crypto-ts": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0"
+  }
+}

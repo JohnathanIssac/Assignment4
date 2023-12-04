@@ -2,6 +2,7 @@
 import express from "express";
 import mysql from "mysql2";
 import cors from "cors";
+import crypto from "crypto-js"
 
 // Create Express app
 const app = express();
@@ -96,6 +97,32 @@ app.post('/updateTranscript', (req, res) => {
     }
   });
 });
+
+app.post('/login', (req, res) => {
+  const {studentID, password} = req.body;
+  const sql = "SELECT * FROM students WHERE id = ?";
+  db.query(sql, [studentID], (err, result) => {
+    if (err) {
+      console.error('Error updating transcript:', err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    }
+    if(result.length === 0){
+      console.log('Student with ID ${studentID} not found');
+      return res.status(404).send("Student not found");
+    }
+    const student = result[0];
+    const hashCheck = crypto.SHA256(student.first_name + student.last_name + password).toString();
+    console.log(`${hashCheck}`);
+    
+    if(hashCheck === student.password){
+      console.log("success");
+      res.json({message: "Login Successful", studentID});
+    }else{
+      console.log("failed");
+      res.status(404).send('Invalid password');
+    }
+  })
+})
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
